@@ -32,7 +32,7 @@ class PromptCTFEnv:
 
         # Load appropriate defender
         if defender_backend == "qwen":
-            self.defender = QwenDefender()
+            import torch; self.defender = QwenDefender(device="cuda" if torch.cuda.is_available() else "cpu")
         else:  # mock
             self.defender = MockDefender(seed=seed)
 
