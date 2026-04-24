@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  promptctf:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: promptctf-env
+    ports:
+      - "8000:8000"
+      - "7860:7860"
+    volumes:
+      - ./output:/app/output
+      - ./data:/app/data
+    environment:
+      - WANDB_PROJECT=promptctf-env
+    networks:
+      - promptctf-network
+
+networks:
+  promptctf-network:
+    driver: bridge
