@@ -104,7 +104,7 @@ def validate_core_classes():
 
         logger.info("  ✓ Task registry loaded")
 
-        from src.env.environment import PromptCTFEnv
+        from src.environment import PromptCTFEnv
 
         logger.info("  ✓ Environment imported")
 
@@ -174,7 +174,7 @@ def validate_environment_creation():
     """Test creating and using environment."""
     logger.info("\nValidating environment creation...")
 
-    from src.env.environment import PromptCTFEnv
+    from src.environment import PromptCTFEnv
     from src.env.models import Mode
 
     try:

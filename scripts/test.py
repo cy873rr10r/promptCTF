@@ -5,7 +5,7 @@ import os
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from src.env.environment import PromptCTFEnv
+from src.environment import PromptCTFEnv
 from src.env.models import Mode
 from src.env.tasks import TASK_REGISTRY
 import logging

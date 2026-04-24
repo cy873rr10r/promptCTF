@@ -154,7 +154,7 @@ def test_environment_integration():
     logger.info("Environment Integration Test")
     logger.info("=" * 60)
 
-    from src.env.environment import PromptCTFEnv
+    from src.environment import PromptCTFEnv
 
     # Test with mock defender (baseline)
     logger.info("\nTesting with mock defender...")

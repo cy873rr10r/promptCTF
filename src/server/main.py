@@ -7,7 +7,7 @@ from typing import Any, Dict, List, Optional
 import uuid
 import logging
 
-from src.env.environment import PromptCTFEnv
+from src.environment import PromptCTFEnv
 from src.env.models import Mode
 from src.env.tasks import TASK_REGISTRY
 

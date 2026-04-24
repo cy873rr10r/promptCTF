@@ -15,7 +15,7 @@ except ImportError:
     torch = None
     tqdm = None
 
-from src.env.environment import PromptCTFEnv
+from src.environment import PromptCTFEnv
 from src.env.models import Difficulty, Mode
 from src.env.tasks import TASK_REGISTRY
 from src.training.grpo_dataset import get_dataset

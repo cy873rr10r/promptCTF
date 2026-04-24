@@ -10,7 +10,7 @@ from typing import Dict, List, Tuple
 project_root = Path(__file__).parent.parent
 sys.path.insert(0, str(project_root))
 
-from src.env.environment import PromptCTFEnv
+from src.environment import PromptCTFEnv
 from src.env.models import Mode
 from src.env.tasks import TASK_REGISTRY
 from src.training.grpo_dataset import get_dataset
