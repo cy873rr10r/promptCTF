@@ -45,7 +45,7 @@ tasks:
 # Model configuration
 models:
   attacker:
-    model_name: "Qwen/Qwen2.5-7B"
+    model_name: "Qwen/Qwen2.5-0.5B-Instruct"  # Use 0.5B for local dev; swap to 7B for T4
     LoRA:
       r: 16
       lora_alpha: 32
@@ -53,10 +53,10 @@ models:
       lora_dropout: 0.05
       bias: "none"
       task_type: "CAUSAL_LM"
-      
+
   defender:
-    model_name: "Qwen/Qwen2.5-7B"
-    backend: "mock"
+    model_name: "Qwen/Qwen2.5-0.5B-Instruct"  # Use 0.5B for local dev; swap to 7B for T4
+    backend: "mock"  # Can switch to "qwen" for real defender
     frozen: true
 
 # Training configuration

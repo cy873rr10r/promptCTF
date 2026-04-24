@@ -57,6 +57,7 @@ def validate_project_structure():
         "src/env/environment.py",
         "src/env/defender.py",
         "src/env/qwen_defender.py",
+        "src/env/graders.py",
         "src/env/tasks.py",
         "src/env/rewards.py",
         "src/models/__init__.py",
@@ -66,12 +67,13 @@ def validate_project_structure():
         "src/training/wandb_logger.py",
         "src/server/main.py",
         "src/ui/app.py",
+        "scripts/baseline.py",
         "configs/openenv.yaml",
     ]
 
     all_good = True
     for fpath in required_files:
-        full_path = Path("/media/cybter/Labs/promptCTF") / fpath
+        full_path = project_root / fpath
         if full_path.exists():
             logger.info(f"  ✓ {fpath}")
         else:

@@ -21,9 +21,9 @@ This local setup does not require GPU. Defender behavior is mocked so you can va
 ## Quick Start
 
 ```bash
-cd /media/cybter/Labs/promptCTF
-python -m venv prompctfvenv
-source prompctfvenv/bin/activate
+cd /path/to/promptctf
+python -m venv promptctf_venv
+source promptctf_venv/bin/activate
 pip install -r requirements.txt
 ```
 

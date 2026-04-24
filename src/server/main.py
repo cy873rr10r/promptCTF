@@ -207,6 +207,40 @@ async def get_env_info(env_id: str):
     }
 
 
+@app.get("/env/{env_id}/state", tags=["Environment"])
+async def get_env_state(env_id: str):
+    """Get detailed state of an environment including conversation and progress."""
+    if env_id not in environments:
+        raise HTTPException(status_code=404, detail="Environment not found")
+
+    env = environments[env_id]
+
+    # Build conversation history
+    conversation = []
+    for msg in env.conversation[1:]:  # Skip system message
+        conversation.append({
+            "role": msg.role,
+            "content": msg.content
+        })
+
+    return {
+        "env_id": env_id,
+        "task_id": env.task.task_id,
+        "difficulty": env.task.difficulty.value,
+        "mode": env.mode.value,
+        "current_step": env.current_step,
+        "max_steps": env.max_steps,
+        "done": env.done,
+        "episode_reward": env.episode_reward,
+        "attempts_used": env.current_step,
+        "conversation": conversation,
+        "flag_status": {
+            "extracted": False,  # Placeholder: could track if flag was leaked
+            "leaked_ratio": 0.0,  # Placeholder: from last step
+        }
+    }
+
+
 @app.delete("/env/{env_id}", tags=["Environment"])
 async def delete_environment(env_id: str):
     """Delete an environment"""

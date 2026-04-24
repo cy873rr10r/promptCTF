@@ -13,7 +13,7 @@ Run PromptCTF environment logic locally without GPU, using a mock defender backe
 ## 2. Local Installation
 
 ```bash
-cd /media/cybter/Labs/promptCTF
+cd /path/to/promptctf
 python -m venv prompctfvenv
 source prompctfvenv/bin/activate
 pip install -r requirements.txt
