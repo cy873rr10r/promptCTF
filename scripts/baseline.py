@@ -1,4 +1,4 @@
-"""Baseline evaluation script: runs all tasks with Qwen2.5-0.5B attacker."""
+"""Baseline evaluation script: runs all tasks with real Qwen2.5-0.5B defender via Unsloth."""
 
 import sys
 import logging
@@ -22,8 +22,8 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
-def run_baseline_with_mock_defender() -> Dict[str, Dict]:
-    """Run baseline with mock defender (no GPU needed)."""
+def run_baseline() -> Dict[str, Dict]:
+    """Run baseline with real Qwen2.5-0.5B-Instruct defender."""
     results = {}
 
     for task_id in ["easy", "medium", "hard"]:
@@ -33,11 +33,11 @@ def run_baseline_with_mock_defender() -> Dict[str, Dict]:
 
         task = TASK_REGISTRY.get(task_id)
 
-        # Create environment with mock defender
+        # Create environment with real Qwen defender
         env = PromptCTFEnv(
             task_id=task_id,
             mode=Mode.RED,
-            defender_backend="mock",
+            defender_backend="qwen",
             seed=42,
         )
 
@@ -113,11 +113,11 @@ def save_results(results: Dict[str, Dict], output_file: str = "baseline_results.
 def main() -> int:
     """Run baseline and report results."""
     logger.info("Starting PromptCTF-Env Baseline Evaluation")
-    logger.info("Model: Qwen2.5-0.5B-Instruct (mock defender)")
+    logger.info("Model: Qwen2.5-0.5B-Instruct (real inference)")
     logger.info("Mode: RED (attacker)")
 
     try:
-        results = run_baseline_with_mock_defender()
+        results = run_baseline()
         print_results(results)
         save_results(results)
         logger.info("\n✓ Baseline evaluation complete")

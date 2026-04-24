@@ -299,7 +299,40 @@ class DefenderTrainer:
         if self.tokenizer.pad_token is None:
             self.tokenizer.pad_token = self.tokenizer.eos_token
 
+        # Freeze attacker model parameters (opponent remains static during defender training)
+        self._load_and_freeze_attacker()
+
         logger.info("Model loaded successfully")
+
+    def _load_and_freeze_attacker(self) -> None:
+        """Load attacker model and freeze all its parameters."""
+        try:
+            logger.info("Loading attacker model (frozen)...")
+            if HAS_UNSLOTH:
+                attacker_model, _ = FastLanguageModel.from_pretrained(
+                    model_name=self.model_name,
+                    max_seq_length=512,
+                    dtype=torch.float32 if self.config.device == "cpu" else torch.float16,
+                    load_in_4bit=self.config.use_4bit and self.config.device == "cuda",
+                )
+            else:
+                attacker_model = AutoModelForCausalLM.from_pretrained(
+                    self.model_name,
+                    torch_dtype=torch.float32 if self.config.device == "cpu" else torch.float16,
+                    device_map=self.config.device,
+                    trust_remote_code=True,
+                )
+
+            # Freeze all parameters
+            for param in attacker_model.parameters():
+                param.requires_grad = False
+
+            # Set to eval mode
+            attacker_model.eval()
+
+            logger.info(f"Attacker model frozen: {sum(p.numel() for p in attacker_model.parameters() if not p.requires_grad)} frozen parameters")
+        except Exception as e:
+            logger.warning(f"Could not load attacker model for freezing: {e}. Continuing with defender training only.")
 
     def save_model(self, save_path: str) -> None:
         """Save model and LoRA weights."""
