@@ -356,7 +356,7 @@ if __name__ == "__main__":
     
     parser = argparse.ArgumentParser()
     parser.add_argument("--task", default="easy", choices=["easy", "medium", "hard"])
-    parser.add_argument("--model", default="Qwen/Qwen2.5-7B")
+    parser.add_argument("--model", default="Qwen/Qwen2.5-0.5B-Instruct")
     parser.add_argument("--epochs", type=int, default=3)
     parser.add_argument("--batch_size", type=int, default=8)
     parser.add_argument("--learning_rate", type=float, default=5e-5)
