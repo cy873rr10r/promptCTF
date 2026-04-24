@@ -270,7 +270,7 @@ class AttackerGRPOTrainer:
                 lora_dropout=self.config.lora_dropout,
                 target_modules=list(self.config.lora_target_modules),
                 bias="none",
-                task_type="CAUSAL_LM",
+
             )
         else:
             logger.info("Loading model with standard transformers...")
